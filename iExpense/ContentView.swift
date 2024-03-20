@@ -52,7 +52,7 @@ struct ContentView: View {
                                         .font(.headline)
                                     Text(item.type)
                                     
-                                    Spacer()
+
                                     Text(item.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                                         .foregroundColor(self.expenseStyles(forAmount: Int(item.amount)))
                                 }
@@ -70,7 +70,7 @@ struct ContentView: View {
                                         .font(.headline)
                                     Text(item.type)
                                     
-                                    Spacer()
+
                                     Text(item.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                                         .foregroundColor(self.expenseStyles(forAmount: Int(item.amount)))
                                 }
@@ -81,17 +81,20 @@ struct ContentView: View {
                     .onDelete(perform: removeItems)
                 }
             } .toolbar {
-                Button {
-                    showingAddExpense = true
-                } label: {
+//                Button {
+//                    showingAddExpense = true
+//                } label: {
+//                    Image(systemName: "plus")
+//                }
+                NavigationLink(destination: AddView(expenses: Expenses())) {
                     Image(systemName: "plus")
                 }
             }
             .navigationTitle("iExpense")
         }
-        .sheet(isPresented: $showingAddExpense) {
-            AddView(expenses: expenses)
-        }
+//        .sheet(isPresented: $showingAddExpense) {
+//            AddView(expenses: expenses)
+//        }
     }
     func removeItems(at offsets: IndexSet) {
         expenses.items.remove(atOffsets: offsets)
